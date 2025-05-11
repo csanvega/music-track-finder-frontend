@@ -1,22 +1,18 @@
-import { useState } from 'react'
-import Button from '@mui/material/Button'
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 
-function App() {
-  const [count, setCount] = useState(0)
+import NavigationAppBar from './components/NavigationAppBar';
+import Home from './components/Home';
 
+export default function App() {
   return (
-    <>
-      <h1>Initial Setup</h1>
-      <div>
-        <Button
-          variant="contained"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          count is {count}
-        </Button>
-      </div>
-    </>
-  )
+    <Container>
+      <CssBaseline />
+      <NavigationAppBar />
+      <Box sx={{ mt: '5rem' }}>
+        <Home></Home>
+      </Box>
+    </Container>
+  );
 }
-
-export default App
