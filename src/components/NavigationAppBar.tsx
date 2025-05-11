@@ -1,12 +1,12 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import AlbumIcon from '@mui/icons-material/Album'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import SearchFormNavBar from './SearchFormNavBar'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import { Button } from '@mui/material'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AlbumIcon from '@mui/icons-material/Album';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import SearchFormNavBar from './SearchFormNavBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
 
 export default function NavigationAppBar() {
   return (
@@ -30,7 +30,7 @@ export default function NavigationAppBar() {
             <Button
               variant="contained"
               color="secondary"
-              endIcon={<AddCircleIcon />}
+              startIcon={<AddCircleIcon />}
             >
               Create Track
             </Button>
@@ -43,5 +43,5 @@ export default function NavigationAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import Container from '@mui/material/Container'
-import Card from '@mui/material/Card'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import Chip from '@mui/material/Chip'
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 
 export default function AlbumCard() {
   return (
@@ -47,5 +47,5 @@ export default function AlbumCard() {
         </CardContent>
       </Card>
     </Container>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import InputBase from '@mui/material/InputBase'
-import SearchIcon from '@mui/icons-material/Search'
-import { styled, alpha } from '@mui/material/styles'
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
 
 export default function SearchFormNavBar() {
   const Search = styled('div')(({ theme }) => ({
@@ -17,7 +17,7 @@ export default function SearchFormNavBar() {
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
-  }))
+  }));
 
   const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -27,7 +27,7 @@ export default function SearchFormNavBar() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }))
+  }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
@@ -40,7 +40,7 @@ export default function SearchFormNavBar() {
         width: '20ch',
       },
     },
-  }))
+  }));
 
   return (
     <Search>
@@ -52,5 +52,5 @@ export default function SearchFormNavBar() {
         inputProps={{ 'aria-label': 'search' }}
       />
     </Search>
-  )
+  );
 }
