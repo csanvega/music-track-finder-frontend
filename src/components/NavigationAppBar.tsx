@@ -7,8 +7,22 @@ import SearchFormNavBar from './SearchFormNavBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 export default function NavigationAppBar() {
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    navigate('/create');
+  };
+
+  const handleSearch = (isrc: string): void => {
+    console.log('isrc typed..', isrc);
+    if (isrc) {
+      navigate(`/track/${isrc}`);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -23,7 +37,7 @@ export default function NavigationAppBar() {
             Track Finder
           </Typography>
 
-          <SearchFormNavBar />
+          <SearchFormNavBar onClickSearch={handleSearch} />
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -31,6 +45,7 @@ export default function NavigationAppBar() {
               variant="contained"
               color="secondary"
               startIcon={<AddCircleIcon />}
+              onClick={handleCreate}
             >
               Create Track
             </Button>

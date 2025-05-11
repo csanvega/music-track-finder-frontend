@@ -1,8 +1,19 @@
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { useState } from 'react';
 
-export default function SearchFormNavBar() {
+interface SearchFormNavBarProps {
+  onClickSearch: (isrc: string) => void;
+}
+
+export default function SearchFormNavBar({
+  onClickSearch,
+}: SearchFormNavBarProps) {
+  const [isrc, setIsrc] = useState('');
+
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -42,15 +53,42 @@ export default function SearchFormNavBar() {
     },
   }));
 
+  const handleChangeIsrc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsrc(e.target.value);
+  };
+
+  const handleSearch = (): void => {
+    onClickSearch(isrc);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search track"
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </Search>
+    <Box
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search track"
+          inputProps={{ 'aria-label': 'search' }}
+          value={isrc}
+          onChange={handleChangeIsrc}
+          onKeyDown={handleKeyDown}
+          autoFocus
+          error
+        />
+      </Search>
+
+      <Button variant="contained" color="secondary" onClick={handleSearch}>
+        Search
+      </Button>
+    </Box>
   );
 }
