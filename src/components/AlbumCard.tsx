@@ -5,7 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 
-export default function AlbumCard() {
+import type { Track } from '../types';
+
+interface AlbumCardProps {
+  track: Track;
+}
+
+export default function AlbumCard({ track }: AlbumCardProps) {
   return (
     <Container
       sx={{
@@ -30,18 +36,18 @@ export default function AlbumCard() {
             objectFit: 'cover',
             minWidth: 300,
           }}
-          image="albumCoverExample.jpeg"
+          image={track.coverUrl}
           title="Album Cover"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Wake Up Mr. West
+            {track.name}
           </Typography>
           <Typography variant="h6" sx={{ color: 'text.secondary' }}>
-            Kanye West
+            {track.artistName}
           </Typography>
           <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
-            Duration: 4:20
+            Duration: {track.playbackSeconds}
           </Typography>
           <Chip sx={{ mt: '0.5rem' }} label="Explicit" />
         </CardContent>
