@@ -17,7 +17,6 @@ export default function NavigationAppBar() {
   };
 
   const handleSearch = (isrc: string): void => {
-    console.log('isrc typed..', isrc);
     if (isrc) {
       navigate(`/track/${isrc}`);
     }
