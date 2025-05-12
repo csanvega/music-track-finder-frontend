@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import { trackFinderApi } from '../services/trackFinderApi';
 import type { TrackState } from '../types';
 
@@ -22,6 +23,20 @@ export const createTrack = createAsyncThunk(
   }
 );
 
+export const getTrackMetadata = createAsyncThunk(
+  'track/get',
+  async (isrc: string, { rejectWithValue }) => {
+    try {
+      const track = await trackFinderApi.getTrackMetadata(isrc);
+      return { ...track };
+    } catch (error) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : 'Failed to retrieve track'
+      );
+    }
+  }
+);
+
 const trackSlice = createSlice({
   name: 'track',
   initialState,
@@ -32,11 +47,24 @@ const trackSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(createTrack.fulfilled, (state, action) => {
+      .addCase(createTrack.fulfilled, (state) => {
+        state.loading = false;
+        //state.currentTrack = action.payload;
+        state.error = null;
+      })
+      .addCase(createTrack.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getTrackMetadata.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getTrackMetadata.fulfilled, (state, action) => {
         state.loading = false;
         state.currentTrack = action.payload;
       })
-      .addCase(createTrack.rejected, (state, action) => {
+      .addCase(getTrackMetadata.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
