@@ -3,7 +3,7 @@ import AlbumIcon from '@mui/icons-material/Album';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import SearchFormNavBar from './SearchFormNavBar';
+import SearchFormNavBar from '../components/SearchFormNavBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
@@ -17,9 +17,8 @@ export default function NavigationAppBar() {
   };
 
   const handleSearch = (isrc: string): void => {
-    console.log('isrc typed..', isrc);
     if (isrc) {
-      navigate(`/track/${isrc}`);
+      navigate(`/track/${isrc}?refresh=${Date.now()}`, { replace: true });
     }
   };
 
