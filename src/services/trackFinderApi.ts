@@ -1,9 +1,9 @@
 const TRACK_FINDER_API =
-  import.meta.env.TRACK_FINDER_API || 'http://localhost:8080/codechallenge';
+  import.meta.env.TRACK_FINDER_API || 'http://localhost:8080';
 
 export const trackFinderApi = {
   createTrack: async (isrc: string) => {
-    const responseCreate = await fetch(`${TRACK_FINDER_API}/track`, {
+    const responseCreate = await fetch(`${TRACK_FINDER_API}/codechallenge/track`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const trackFinderApi = {
     return data;
   },
   getTrackMetadata: async (isrc: string) => {
-    const responseGetTrack = await fetch(`${TRACK_FINDER_API}/track/${isrc}`);
+    const responseGetTrack = await fetch(`${TRACK_FINDER_API}/codechallenge/track/${isrc}`);
 
     const data = await responseGetTrack.json();
 
@@ -28,7 +28,7 @@ export const trackFinderApi = {
     }
 
     const responseGetImage = await fetch(
-      `${TRACK_FINDER_API}/track/${isrc}/cover`
+      `${TRACK_FINDER_API}/codechallenge/track/${isrc}/cover`
     );
 
     if (!responseGetTrack.ok) {
