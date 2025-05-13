@@ -1,24 +1,31 @@
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AlbumIcon from '@mui/icons-material/Album';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import SearchFormNavBar from '../components/SearchFormNavBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router';
+import Button from '@mui/material/Button';
+
+import SearchFormNavBar from '../components/SearchFormNavBar';
+import type { AppDispatch } from '../store/store';
+import { clearState } from '../store/trackFinderSlice';
 
 export default function NavigationAppBar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleCreate = () => {
+    dispatch(clearState());
     navigate('/create');
   };
 
   const handleSearch = (isrc: string): void => {
     if (isrc) {
-      navigate(`/track/${isrc}?refresh=${Date.now()}`, { replace: true });
+      dispatch(clearState());
+      navigate(`/track/${isrc}`, { replace: true });
     }
   };
 
@@ -50,7 +57,7 @@ export default function NavigationAppBar() {
             </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton aria-label="add">
+            <IconButton aria-label="add" onClick={handleCreate}>
               <AddCircleIcon sx={{ color: 'white' }} />
             </IconButton>
           </Box>

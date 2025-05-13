@@ -18,17 +18,16 @@ export default function TrackMetadata() {
   );
 
   useEffect(() => {
-    if (isrc && !currentTrack) {
+    //TODO: Fix issue with rendering album incorrectly
+    if (isrc && !currentTrack && !loading) {
       dispatch(getTrackMetadata(isrc));
     }
-  }, [currentTrack, dispatch, isrc]);
-
-  console.log('render');
+  }, [currentTrack, dispatch, isrc, loading]);
 
   return (
     <Box>
       {currentTrack && <AlbumCard track={currentTrack} />}
-      {error && <Alert severity="error">Erro getting the metadata.</Alert>}
+      {error && <Alert severity="error">{error}</Alert>}
       {loading && <CircularProgress />}
     </Box>
   );
