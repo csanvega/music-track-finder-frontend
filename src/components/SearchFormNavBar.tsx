@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
 
 interface SearchFormNavBarProps {
   onClickSearch: (isrc: string) => void;
@@ -76,7 +76,7 @@ export default function SearchFormNavBar({
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search track"
+          placeholder="Search track by ISRC"
           inputProps={{ 'aria-label': 'search' }}
           value={isrc}
           onChange={handleChangeIsrc}

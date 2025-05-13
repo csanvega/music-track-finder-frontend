@@ -18,8 +18,7 @@ export default function Home() {
       <Typography variant="h5" component="div" color="info">
         Here you can find information about your favorite records. First, you
         need to create the tracks using the 'Create Track' button, and then you
-        can search for the records through the search bar in the navigation bar
-        using the ISRC.
+        can search for the records through the search bar using the ISRC.
       </Typography>
     </Container>
   );

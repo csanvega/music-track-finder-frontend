@@ -49,7 +49,21 @@ export default function AlbumCard({ track }: AlbumCardProps) {
           <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
             Duration: {track.playbackSeconds}
           </Typography>
-          <Chip sx={{ mt: '0.5rem' }} label="Explicit" />
+          {track.isExplicit ? (
+            <Chip
+              sx={{ mt: '0.5rem' }}
+              label="Explicit"
+              color="primary"
+              variant="filled"
+            />
+          ) : (
+            <Chip
+              sx={{ mt: '0.5rem' }}
+              label="No Explicit"
+              color="primary"
+              variant="outlined"
+            />
+          )}
         </CardContent>
       </Card>
     </Container>

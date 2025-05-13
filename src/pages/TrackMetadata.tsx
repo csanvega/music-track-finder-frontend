@@ -13,22 +13,20 @@ export default function TrackMetadata() {
   const { isrc } = useParams<{ isrc: string }>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { currentTrack, loading, error } = useSelector(
+  const { trackSelected, loading, error } = useSelector(
     (state: RootState) => state.track
   );
 
   useEffect(() => {
-    if (isrc && !currentTrack) {
+    if (isrc && !trackSelected) {
       dispatch(getTrackMetadata(isrc));
     }
-  }, [currentTrack, dispatch, isrc]);
-
-  console.log('render');
+  }, [trackSelected, dispatch, isrc]);
 
   return (
     <Box>
-      {currentTrack && <AlbumCard track={currentTrack} />}
-      {error && <Alert severity="error">Erro getting the metadata.</Alert>}
+      {trackSelected && <AlbumCard track={trackSelected} />}
+      {error && <Alert severity="error">{error}</Alert>}
       {loading && <CircularProgress />}
     </Box>
   );
