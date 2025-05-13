@@ -1,5 +1,5 @@
 const TRACK_FINDER_API =
-  import.meta.env.TRACK_FINDER_API || 'http://localhost:8080';
+  import.meta.env.VITE_TRACK_FINDER_API || 'http://localhost:8080';
 
 export const trackFinderApi = {
   createTrack: async (isrc: string) => {
