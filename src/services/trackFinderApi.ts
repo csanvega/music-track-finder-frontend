@@ -8,13 +8,9 @@ export const trackFinderApi = {
       body: JSON.stringify({ isrc }),
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to create track');
-    }
-
     const data = await response.json();
     if (!response.ok) {
-      throw data;
+      throw new Error(data.message);
     }
     
     return data;
@@ -26,7 +22,7 @@ export const trackFinderApi = {
 
     const data = await response.json();
     if (!response.ok) {
-      throw data;
+      throw new Error(data.message);
     }
   
     return data;

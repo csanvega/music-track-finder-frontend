@@ -2,22 +2,20 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 
 import CreateTrackForm from '../components/CreateTrackForm';
 import type { AppDispatch, RootState } from '../store/store';
 import { createTrack } from '../store/trackFinderSlice';
+import AlbumCard from '../components/AlbumCard';
 
 export default function CreateTrack() {
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error } = useSelector((state: RootState) => state.track);
+  const { loading, error, currentTrack } = useSelector(
+    (state: RootState) => state.track
+  );
 
   const handleCreateTrack = async (isrc: string): Promise<void> => {
-    const result = await dispatch(createTrack(isrc));
-    if (createTrack.fulfilled.match(result)) {
-      navigate(`/track/${isrc}`);
-    }
+    await dispatch(createTrack(isrc));
   };
 
   return (
@@ -30,8 +28,12 @@ export default function CreateTrack() {
       }}
     >
       <CreateTrackForm onCreateTrack={handleCreateTrack} />
-      {error && <Alert severity="error">This is an error Alert.</Alert>}
+      {error && <Alert severity="error">{error}</Alert>}
       {loading && <CircularProgress />}
+      {currentTrack && (
+        <Alert severity="success">Track was created successfully.</Alert>
+      )}
+      {currentTrack && <AlbumCard track={currentTrack} />}
     </Box>
   );
 }

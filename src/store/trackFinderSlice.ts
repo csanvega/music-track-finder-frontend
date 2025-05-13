@@ -17,7 +17,7 @@ export const createTrack = createAsyncThunk(
       return { ...track };
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : 'Failed to create track'
+        error instanceof Error ? error.message : 'Failed creating track'
       );
     }
   }
@@ -31,7 +31,7 @@ export const getTrackMetadata = createAsyncThunk(
       return { ...track };
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : 'Failed to retrieve track'
+        error instanceof Error ? error.message : 'Failed getting track'
       );
     }
   }
@@ -40,35 +40,48 @@ export const getTrackMetadata = createAsyncThunk(
 const trackSlice = createSlice({
   name: 'track',
   initialState,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.currentTrack = null;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createTrack.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.currentTrack = null;
       })
-      .addCase(createTrack.fulfilled, (state) => {
+      .addCase(createTrack.fulfilled, (state, action) => {
         state.loading = false;
-        //state.currentTrack = action.payload;
         state.error = null;
+        state.currentTrack = action.payload;
       })
       .addCase(createTrack.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+        state.currentTrack = null;
       })
       .addCase(getTrackMetadata.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.currentTrack = null;
       })
       .addCase(getTrackMetadata.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.currentTrack = action.payload;
       })
       .addCase(getTrackMetadata.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+        state.currentTrack = null;
       });
   },
 });
+
+export const { clearState } = trackSlice.actions;
 
 export default trackSlice.reducer;
