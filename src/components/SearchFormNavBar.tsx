@@ -76,7 +76,7 @@ export default function SearchFormNavBar({
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search track"
+          placeholder="Search track by ISRC"
           inputProps={{ 'aria-label': 'search' }}
           value={isrc}
           onChange={handleChangeIsrc}

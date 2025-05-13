@@ -8,7 +8,8 @@ export interface Track {
 }
 
 export interface TrackState {
-  currentTrack: Track | null;
+  trackSelected: Track | null;
+  trackCreated: Track | null;
   loading: boolean;
   error: string | null;
 }

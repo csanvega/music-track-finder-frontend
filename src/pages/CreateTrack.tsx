@@ -10,7 +10,7 @@ import AlbumCard from '../components/AlbumCard';
 
 export default function CreateTrack() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error, currentTrack } = useSelector(
+  const { loading, error, trackCreated } = useSelector(
     (state: RootState) => state.track
   );
 
@@ -30,10 +30,10 @@ export default function CreateTrack() {
       <CreateTrackForm onCreateTrack={handleCreateTrack} />
       {error && <Alert severity="error">{error}</Alert>}
       {loading && <CircularProgress />}
-      {currentTrack && (
+      {trackCreated && (
         <Alert severity="success">Track was created successfully.</Alert>
       )}
-      {currentTrack && <AlbumCard track={currentTrack} />}
+      {trackCreated && <AlbumCard track={trackCreated} />}
     </Box>
   );
 }

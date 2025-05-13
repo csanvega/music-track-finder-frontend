@@ -11,20 +11,23 @@ import Button from '@mui/material/Button';
 
 import SearchFormNavBar from '../components/SearchFormNavBar';
 import type { AppDispatch } from '../store/store';
-import { clearState } from '../store/trackFinderSlice';
+import {
+  clearTrackCreated,
+  clearTrackSelected,
+} from '../store/trackFinderSlice';
 
 export default function NavigationAppBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const handleCreate = () => {
-    dispatch(clearState());
-    navigate('/create');
+    dispatch(clearTrackCreated());
+    navigate('/create', { replace: true });
   };
 
   const handleSearch = (isrc: string): void => {
     if (isrc) {
-      dispatch(clearState());
+      dispatch(clearTrackSelected());
       navigate(`/track/${isrc}`, { replace: true });
     }
   };

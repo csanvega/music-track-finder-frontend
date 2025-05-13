@@ -13,20 +13,19 @@ export default function TrackMetadata() {
   const { isrc } = useParams<{ isrc: string }>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { currentTrack, loading, error } = useSelector(
+  const { trackSelected, loading, error } = useSelector(
     (state: RootState) => state.track
   );
 
   useEffect(() => {
-    //TODO: Fix issue with rendering album incorrectly
-    if (isrc && !currentTrack && !loading) {
+    if (isrc && !trackSelected) {
       dispatch(getTrackMetadata(isrc));
     }
-  }, [currentTrack, dispatch, isrc, loading]);
+  }, [trackSelected, dispatch, isrc]);
 
   return (
     <Box>
-      {currentTrack && <AlbumCard track={currentTrack} />}
+      {trackSelected && <AlbumCard track={trackSelected} />}
       {error && <Alert severity="error">{error}</Alert>}
       {loading && <CircularProgress />}
     </Box>

@@ -4,7 +4,8 @@ import { trackFinderApi } from '../services/trackFinderApi';
 import type { TrackState } from '../types';
 
 const initialState: TrackState = {
-  currentTrack: null,
+  trackCreated: null,
+  trackSelected: null,
   loading: false,
   error: null,
 };
@@ -41,8 +42,13 @@ const trackSlice = createSlice({
   name: 'track',
   initialState,
   reducers: {
-    clearState: (state) => {
-      state.currentTrack = null;
+    clearTrackSelected: (state) => {
+      state.trackSelected = null;
+      state.loading = false;
+      state.error = null;
+    },
+    clearTrackCreated: (state) => {
+      state.trackCreated = null;
       state.loading = false;
       state.error = null;
     },
@@ -52,36 +58,36 @@ const trackSlice = createSlice({
       .addCase(createTrack.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.currentTrack = null;
+        state.trackCreated = null;
       })
       .addCase(createTrack.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.currentTrack = action.payload;
+        state.trackCreated = action.payload;
       })
       .addCase(createTrack.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-        state.currentTrack = null;
+        state.trackCreated = null;
       })
       .addCase(getTrackMetadata.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.currentTrack = null;
+        state.trackSelected = null;
       })
       .addCase(getTrackMetadata.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.currentTrack = action.payload;
+        state.trackSelected = action.payload;
       })
       .addCase(getTrackMetadata.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-        state.currentTrack = null;
+        state.trackSelected = null;
       });
   },
 });
 
-export const { clearState } = trackSlice.actions;
+export const { clearTrackSelected, clearTrackCreated } = trackSlice.actions;
 
 export default trackSlice.reducer;
