@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+# ISRC Track Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**ISRC Track Manager** is a platform that allows you to create and query songs in a local database using an ISRC code. The system connects to the Spotify API to retrieve metadata based on the provided ISRC, and stores it locally.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Create new track**: Enter an ISRC code, and the system will fetch the corresponding track metadata from Spotify and store it in the database.
+- **Search existing tracks**: Look up songs by ISRC to check if they’re already in the database and view their details.
+- **User-friendly interface**: A top navigation bar with a search input and a “Create Track” button for quick access.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Material UI
+- Redux Toolkit
+- React
+- React DOM
+- React Redux
+- React Router
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+The project was created with **Vite**.
+
+## Scripts
+
+```bash
+npm install
+
+npm run dev
+
+npm run build
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Main UI interfaces
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Main Screen
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+![Main Screen](screenshots/screen1.png)
+
+### Create Track
+
+![Track Search](screenshots/screen2.png)
+![New Track Creation](screenshots/screen3.png)
+
+### Track Details
+
+![Track Details](screenshots/screen4.png)
+
+### Mobile
+
+![Track List](screenshots/screen5.png)
