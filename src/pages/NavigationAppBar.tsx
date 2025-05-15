@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useMatch, useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AlbumIcon from '@mui/icons-material/Album';
 import AppBar from '@mui/material/AppBar';
@@ -10,15 +10,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import SearchFormNavBar from '../components/SearchFormNavBar';
-import type { AppDispatch } from '../store/store';
+import type { AppDispatch, RootState } from '../store/store';
 import {
   clearTrackCreated,
   clearTrackSelected,
+  setIsrcSearchValue,
 } from '../store/trackFinderSlice';
 
 export default function NavigationAppBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const isCreateRoute = useMatch('/create');
+  const isrcSearchValue = useSelector(
+    (state: RootState) => state.track.isrcSearchValue
+  );
 
   const handleCreate = () => {
     dispatch(clearTrackCreated());
@@ -26,8 +31,11 @@ export default function NavigationAppBar() {
   };
 
   const handleSearch = (isrc: string): void => {
-    if (isrc) {
+    const hasNewInputToSearch = isrcSearchValue && isrcSearchValue !== isrc;
+    const hasInputWithoutPriorSearch = !isrcSearchValue && isrc;
+    if (hasNewInputToSearch || hasInputWithoutPriorSearch || isCreateRoute) {
       dispatch(clearTrackSelected());
+      dispatch(setIsrcSearchValue(isrc));
       navigate(`/track/${isrc}`, { replace: true });
     }
   };

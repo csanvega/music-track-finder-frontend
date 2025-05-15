@@ -12,16 +12,16 @@ import { getTrackMetadata } from '../store/trackFinderSlice';
 export default function TrackMetadata() {
   const { isrc } = useParams<{ isrc: string }>();
   const dispatch = useDispatch<AppDispatch>();
-
-  const { trackSelected, loading, error } = useSelector(
+  const { trackSelected, isrcSearchValue, loading, error } = useSelector(
     (state: RootState) => state.track
   );
 
   useEffect(() => {
-    if (isrc && !trackSelected) {
-      dispatch(getTrackMetadata(isrc));
+    const isrcValue = isrcSearchValue || isrc;
+    if (isrcValue && !trackSelected) {
+      dispatch(getTrackMetadata(isrcValue));
     }
-  }, [trackSelected, dispatch, isrc]);
+  }, [isrc, isrcSearchValue, trackSelected, dispatch]);
 
   return (
     <Box>

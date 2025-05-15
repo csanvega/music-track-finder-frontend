@@ -3,13 +3,16 @@ const TRACK_FINDER_API =
 
 export const trackFinderApi = {
   createTrack: async (isrc: string) => {
-    const responseCreate = await fetch(`${TRACK_FINDER_API}/codechallenge/track`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ isrc }),
-    });
+    const responseCreate = await fetch(
+      `${TRACK_FINDER_API}/codechallenge/track`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isrc }),
+      }
+    );
 
     const data = await responseCreate.json();
     if (!responseCreate.ok) {
@@ -19,7 +22,9 @@ export const trackFinderApi = {
     return data;
   },
   getTrackMetadata: async (isrc: string) => {
-    const responseGetTrack = await fetch(`${TRACK_FINDER_API}/codechallenge/track/${isrc}`);
+    const responseGetTrack = await fetch(
+      `${TRACK_FINDER_API}/codechallenge/track/${isrc}`
+    );
 
     const data = await responseGetTrack.json();
 

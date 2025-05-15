@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -58,7 +59,9 @@ export default function SearchFormNavBar({
   };
 
   const handleSearch = (): void => {
-    onClickSearch(isrc);
+    if (isrc) {
+      onClickSearch(isrc);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
