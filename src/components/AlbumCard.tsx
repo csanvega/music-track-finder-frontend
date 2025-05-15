@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 
 import type { Track } from '../types';
+import { formatMillisToMinutesSeconds } from '../libs/formating';
 
 interface AlbumCardProps {
   track: Track;
@@ -47,7 +48,7 @@ export default function AlbumCard({ track }: AlbumCardProps) {
             {track.artistName}
           </Typography>
           <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
-            Duration: {track.playbackSeconds}
+            Duration: {formatMillisToMinutesSeconds(track.playbackSeconds)}
           </Typography>
           {track.isExplicit ? (
             <Chip
