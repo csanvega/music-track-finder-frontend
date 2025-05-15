@@ -12,4 +12,5 @@ export interface TrackState {
   trackCreated: Track | null;
   loading: boolean;
   error: string | null;
+  isrcSearchValue: string;
 }

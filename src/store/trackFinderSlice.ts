@@ -6,6 +6,7 @@ import type { TrackState } from '../types';
 const initialState: TrackState = {
   trackCreated: null,
   trackSelected: null,
+  isrcSearchValue: '',
   loading: false,
   error: null,
 };
@@ -52,6 +53,9 @@ const trackSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setIsrcSearchValue: (state, action) => {
+      state.isrcSearchValue = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,6 +92,7 @@ const trackSlice = createSlice({
   },
 });
 
-export const { clearTrackSelected, clearTrackCreated } = trackSlice.actions;
+export const { clearTrackSelected, clearTrackCreated, setIsrcSearchValue } =
+  trackSlice.actions;
 
 export default trackSlice.reducer;
