@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 
 import type { Track } from '../types';
-import { formatMillisToMinutesSeconds } from '../libs/formating';
+import { formatMillisToMinutesSeconds } from '../libs/formatters';
 
 interface AlbumCardProps {
   track: Track;
